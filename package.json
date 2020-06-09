@@ -1,0 +1,38 @@
+{
+  "name": "apollo-server",
+  "version": "1.0.0",
+  "description": "**1.** GraphQL is a query language for your API, and a server-side runtime for executing queries by using a type system you define for your data. GraphQL isn't tied to any specific database or storage engine and is instead backed by your existing code and data. **2.** A GraphQL service is created by defining types and fields on those types, then providing functions for each field on each type. For example, a GraphQL service that tells us who the logged in user is (me) as well as that user's name might look something like this:   `type Query {` `me: User` `}`",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "npm run nodemon",
+    "start:src": "tsc-watch --project . --onSuccess \"npm run nodemon\"",
+    "nodemon": "nodemon --exec babel-node src"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ujjwal-jain18/apollo-server.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ujjwal-jain18/apollo-server/issues"
+  },
+  "homepage": "https://github.com/ujjwal-jain18/apollo-server#readme",
+  "dependencies": {
+    "@babel/plugin-proposal-class-properties": "^7.10.1",
+    "apollo-server-express": "^2.14.2",
+    "body-parser": "^1.19.0",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "express-graphql": "^0.9.0",
+    "graphql": "^15.1.0",
+    "merge-graphql-schemas": "^1.7.8"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.10.2",
+    "@babel/node": "^7.10.1",
+    "@babel/preset-env": "^7.10.2",
+    "nodemon": "^2.0.4"
+  }
+}
