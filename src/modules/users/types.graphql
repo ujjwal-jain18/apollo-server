@@ -4,3 +4,8 @@ type User {
   email: String!
   role: String!
 }
+
+input InputCredentials {
+  email: String!
+  password: String!
+}
