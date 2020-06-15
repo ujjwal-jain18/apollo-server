@@ -1,24 +1,48 @@
-import userInstance from '../../service/user';
 import pubsub from '../pubsub';
 import constants from '../../lib/constants';
 
 export default {
-  createTrainee: (parent, args, context) => {
-    const { user } = args;
-    const addedUser = userInstance.createUser(user);
-    pubsub.publish(constants.subscriptions.TRAINEE_ADDED, { traineeAdded: addedUser});
-    return addedUser;
+  createTrainee: async (parent, args, context) => {
+    const {
+      payload: { name, email, password },
+    } = args;
+    const {
+      dataSources: { traineeAPI },
+    } = context;
+    const response = await traineeAPI.createTrainee({ name, email, password });
+    pubsub.publish(constants.subscriptions.TRAINEE_ADDED, {
+      traineeAdded: response.data,
+    });
+    return response.data;
   },
-  updateTrainee: (parent, args, context) => {
-    const { id, role } = args;
-    const updatedUser = userInstance.updateUser(id, role);
-    pubsub.publish(constants.subscriptions.TRAINEE_UPDATED, { traineeUpdated: updatedUser});
-    return updatedUser;
+
+  updateTrainee: async (parent, args, context) => {
+    const {
+      payload: { id, name, email },
+    } = args;
+    const {
+      dataSources: { traineeAPI },
+    } = context;
+    const response = await traineeAPI.updateTrainee({
+      id,
+      name,
+      email,
+    });
+    pubsub.publish(constants.subscriptions.TRAINEE_UPDATED, {
+      traineeUpdated: { id, name, email },
+    });
+    return response.data;
   },
-  deleteTrainee: (parent, args, context) => {
+
+  deleteTrainee: async (parent, args, context) => {
     const { id } = args;
-    const deletedId = userInstance.deleteUser(id);
-    pubsub.publish(constants.subscriptions.TRAINEE_DELETED, { traineeDeleted: deletedId});
-    return deletedId;
+    const {
+      dataSources: { traineeAPI },
+    } = context;
+    const response = await traineeAPI.deleteTrainee(id);
+    pubsub.publish(constants.subscriptions.TRAINEE_DELETED, {
+      traineeDeleted: response.data.id,
+    });
+    return response.data.id;
   },
 };
