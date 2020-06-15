@@ -1,13 +1,12 @@
-import userInterface from '../../service/user'; 
-
 export default {
-    getAllTrainees: () => {
-        return userInterface.getAllUsers();
-    },
-
-    getTrainee: (parent, args, context) => {
-        const { id } = args;
-        return userInterface.getUser(id);
-    }
-
+  getTrainee: async (parent, args, context) => {
+    const {
+      options: { skip, limit },
+    } = args;
+    const {
+      dataSources: { traineeAPI },
+    } = context;
+    const response = await traineeAPI.getTrainee({ skip, limit });
+    return response.data.records;
+  },
 };
