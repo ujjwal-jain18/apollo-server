@@ -7,6 +7,7 @@ export default {
       dataSources: { traineeAPI },
     } = context;
     const response = await traineeAPI.getTrainee({ skip, limit });
-    return response.data.records;
+    return response.data;
+
   },
 };

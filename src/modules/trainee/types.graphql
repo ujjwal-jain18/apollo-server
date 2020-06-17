@@ -4,6 +4,11 @@ type getUser {
   email: String!
   role: String!
   originalId: ID!
+  createdAt: String!
+}
+type getAllUser {
+  count: Int!
+  records: [getUser]!
 }
 input CreateUserInput {
   name: String!
