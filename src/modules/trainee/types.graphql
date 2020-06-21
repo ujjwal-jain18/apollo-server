@@ -10,6 +10,13 @@ type getAllUser {
   count: Int!
   records: [getUser]!
 }
+
+type updateUser {
+  id: ID!
+  name: String
+  email: String
+}
+
 input CreateUserInput {
   name: String!
   email: String!

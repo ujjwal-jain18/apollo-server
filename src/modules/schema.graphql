@@ -4,7 +4,7 @@ type Query {
 }
 type Mutation {
   createTrainee(payload: CreateUserInput): User!
-  updateTrainee(payload: UpdateUserInput): getUser!
+  updateTrainee(payload: UpdateUserInput): updateUser!
   deleteTrainee(id: ID!): ID!
   loginUser(payload: InputCredentials): String!
   getMe: User!
